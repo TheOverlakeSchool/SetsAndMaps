@@ -4,9 +4,9 @@ import java.util.*;
 
 public class WordCounter {
     public static void main(String[] args) throws FileNotFoundException {
-        System.out.println("input file");
+
         Scanner console = new Scanner(System.in);
-        Scanner scanner = new Scanner(new File(console.next()));
+        Scanner scanner = new Scanner(new File(args[0]));
         Map<String, Integer> words = new HashMap<>();
         while (scanner.hasNext()) {
             String word = scanner.next();
@@ -16,7 +16,25 @@ public class WordCounter {
                 words.put(word, 1);
             }
         }
-        System.out.println("# of unique words: " + words.size());
+        System.out.println("There are " + words.size() + " unique words in " + args[0]);
+        while(true) {
+            console.next();
+
+            while (true) {
+                System.out.print("Enter a search word: ");
+                String word = console.next();
+                if (word.equals("quit")) {
+                    break;
+                }
+                if (words.containsKey(word)) {
+                    System.out.println(word + " appears " + words.get(word) + " times");
+                } else {
+                    System.out.println(word + " does not appear in " + args[0]);
+                }
+            }
+        }
+
+
 
     }
 }
